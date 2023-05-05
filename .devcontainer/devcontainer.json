@@ -4,6 +4,7 @@
         "dockerfile": "Dockerfile",
         "context": "..",
         "args": {
+            // "NVIDIA_CUDA_VARIANT": "12.1.1-cudnn8-runtime-ubuntu22.04",
             // "PYTHON_VARIANT": "3.11.3-bullseye",
             "JULIA_VARIANT": "1.9.0-rc3-bullseye",
             "JULIA_PATH": "/usr/local/julia",
@@ -36,10 +37,12 @@
         "JULIA_PROJECT": "${containerWorkspaceFolder}",
         "JULIA_DEPOT_PATH": "${containerWorkspaceFolder}/.julia",
     },
-    // "runArgs": [
-    //     "--env-file",
-    //     ".devcontainer/devcontainer.env",
-    // ],
+    "runArgs": [
+        "--gpus",
+        "all",
+        // "--env-file",
+        // ".devcontainer/devcontainer.env",
+    ],
     "remoteUser": "vscode",
     "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
 }
