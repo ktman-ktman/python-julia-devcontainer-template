@@ -4,27 +4,35 @@
         "dockerfile": "Dockerfile",
         "context": "..",
         "args": {
-            "VARIANT": "3.11-bullseye",
+            // "PYTHON_VARIANT": "3.11.3-bullseye",
+            "JULIA_VARIANT": "1.9.0-rc3-bullseye",
+            "JULIA_PATH": "/usr/local/julia",
             "USERNAME": "vscode",
             "USE_UID": "1000",
             "USE_GID": "1000",
         }
     },
-    "settings": {
-        "terminal.integrated.profiles.linux": {
-            "bash": {
-                "path": "/bin/bash",
-                "args": [
-                    "-l"
-                ]
-            }
-        }
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "args": [
+                            "-l"
+                        ]
+                    }
+                }
+            },
+            "extensions": [
+                "julialang.language-julia",
+                "VisualStudioExptTeam.vscodeintellicode",
+            ],
+        },
     },
-    "extensions": [
-        "julialang.language-julia",
-        "VisualStudioExptTeam.vscodeintellicode",
-    ],
     "containerEnv": {
+        "JULIA_PATH": "/usr/local/julia",
+        "JULIA_NUM_THREADS": "4",
         "JULIA_PROJECT": "${containerWorkspaceFolder}",
         "JULIA_DEPOT_PATH": "${containerWorkspaceFolder}/.julia",
     },
