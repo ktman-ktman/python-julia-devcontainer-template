@@ -8,14 +8,14 @@ cd ~/dotfiles
 sh ./install_vscode.sh
 cd ${initial_dir}
 
-# poetry
-if [[ ! -f "./.venv" ]] && [[ -f "./poetry.lock" ]]
+# rye
+if [[ ! -f "./.venv" ]] && [[ -f "./pyproject.toml" ]]
 then
-	poetry install
+	rye sync
 fi
 
 # julia
-if [[ ! -f "./.julia" ]] && [[ -f "./Project.toml" ]]
+if [ ! -f "./.julia" ] && [ -f "./Project.toml" ]
 then
-	julia --project=@. -e "using Pkg; Pkg.instantiate()"
+        julia --project=@. -e "using Pkg; Pkg.instantiate()"
 fi
