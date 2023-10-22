@@ -1,5 +1,5 @@
 {
-    "name": "pj",
+    "name": "python-julia-devcontainer-template",
     "build": {
         "dockerfile": "Dockerfile",
         "context": ".",
@@ -11,8 +11,8 @@
         }
     },
     "mounts": [
-            "source=vscode-extensions,target=/home/vscode/.vscode-server/extensions,type=volume",
-            "source=vscode-extensions-insider,target=/home/vscode/.vscode-server-insiders/extensions,type=volume",
+        "source=vscode-extensions,target=/home/vscode/.vscode-server/extensions,type=volume",
+        "source=vscode-extensions-insider,target=/home/vscode/.vscode-server-insiders/extensions,type=volume",
     ],
     "customizations": {
         "vscode": {
