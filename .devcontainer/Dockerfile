@@ -15,6 +15,7 @@ RUN apt-get update \
     locales \
     sudo \
     tmux \
+    vim \
     wget \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
@@ -37,10 +38,9 @@ RUN mkdir -p /home/${USERNAME}/.vscode-server/extensions \
     /home/${USERNAME}/.vscode-server-insiders
 
 # install rye
-ENV RYE_HOME="/home/${USERNAME}/.rye"
-ENV PATH="${RYE_HOME}/shims:${PATH}"
-RUN curl -sSf https://rye-up.com/get | RYE_NO_AUTO_INSTALL=1 RYE_INSTALL_OPTION="--yes" bash \
-    && chown -R ${USERNAME} ${RYE_HOME}
+USER ${USERNAME}
+RUN curl -sSf https://rye-up.com/get | RYE_NO_AUTO_INSTALL=1 RYE_INSTALL_OPTION="--yes" bash 
+USER root
 
 # install juliaup
 USER ${USERNAME}
