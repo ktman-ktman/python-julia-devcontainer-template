@@ -31,22 +31,20 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} \
 
 # make directory for extension
 RUN mkdir -p /home/${USERNAME}/.vscode-server/extensions \
-        /home/${USERNAME}/.vscode-server-insiders/extensions \
+    /home/${USERNAME}/.vscode-server-insiders/extensions \
     && chown -R ${USERNAME} \
-        /home/${USERNAME}/.vscode-server \
-        /home/${USERNAME}/.vscode-server-insiders
+    /home/${USERNAME}/.vscode-server \
+    /home/${USERNAME}/.vscode-server-insiders
 
 # install rye
 ENV RYE_HOME="/home/${USERNAME}/.rye"
 ENV PATH="${RYE_HOME}/shims:${PATH}"
-RUN curl -sSf https://rye-up.com/get | RYE_NO_AUTO_INSTALL=1 RYE_INSTALL_OPTION="--yes" bash
-RUN chown -R ${USERNAME} ${RYE_HOME}
+RUN curl -sSf https://rye-up.com/get | RYE_NO_AUTO_INSTALL=1 RYE_INSTALL_OPTION="--yes" bash \
+    && chown -R ${USERNAME} ${RYE_HOME}
 
 # install juliaup
 USER ${USERNAME}
-# ENV JULIA_DEPOT_PATH="/home/${USERNAME}/.julia"
 RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
-# RUN chown -R ${USERNAME} /home/${USERNAME}/.julia
-
+USER root
 
 CMD ["/bin/bash"]
